@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:alpine
+    container_name: tokengate-redis
+    ports:
+      - "6379:6379"
+    networks:
+      - tokengate-network
+
+  tokengate:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: tokengate-app
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATA_REDIS_HOST: redis
+      RATELIMIT_CAPACITY: 10
+      RATELIMIT_REFILL_RATE_PER_SEC: 0.5
+    depends_on:
+      - redis
+    networks:
+      - tokengate-network
+
+networks:
+  tokengate-network:
+    driver: bridge

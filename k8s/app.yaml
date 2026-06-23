@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tokengate
+  labels:
+    app: tokengate
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: tokengate
+  template:
+    metadata:
+      labels:
+        app: tokengate
+    spec:
+      containers:
+      - name: tokengate
+        image: tokengate:latest
+        imagePullPolicy: Never # Assumes local image for development
+        ports:
+        - containerPort: 8080
+        env:
+        - name: SPRING_DATA_REDIS_HOST
+          value: "redis"
+        - name: RATELIMIT_CAPACITY
+          value: "20"
+        - name: RATELIMIT_REFILL_RATE_PER_SEC
+          value: "1.0"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tokengate-service
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 8080
+  selector:
+    app: tokengate

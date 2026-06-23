@@ -1,0 +1,53 @@
+# Compiled class files
+target/
+.mvn/wrapper/maven-wrapper.jar
+
+# IDE-specific files
+.idea/
+*.iws
+*.iml
+*.ipr
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+.vscode/
+
+# Package Files
+*.jar
+*.war
+*.ear
+
+# Log files
+*.log
+log/
+
+# OS generated files
+.DS_Store
+.localized
+Thumbs.db
+
+# Docker
+Dockerfile.orig
+docker-compose.yaml.orig
+
+# Kubernetes
+k8s/*.orig
+
+# Spring Boot Actuator
+/actuator
+
+# Secrets / Local Config
+# Exclude application.properties if it contains sensitive information
+# but typically it's tracked and sensitive parts are managed by environment variables or secrets.
+# For now, keeping it tracked as per previous context.
+# src/main/resources/application.properties
