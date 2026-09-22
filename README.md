@@ -90,3 +90,6 @@ curl -X POST "http://localhost:8080/api/v1/ratelimit/check?clientId=user123"
 
 ## Resilience Strategy
 TokenGate implements a **fail-open** strategy. If Redis is unreachable, it logs the error and returns `allowed: true` with `remainingTokens: -1` to ensure service availability under degraded conditions.
+
+## Contributing
+Contributions are always welcome! Please feel free to fork the repository and submit a Pull Request.
